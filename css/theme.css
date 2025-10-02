@@ -2902,3 +2902,11 @@ footer {
 	background: url(img/arcvive-post-background.jpg) center;
 	background-size: cover;
 }
+
+.btn-link.btn-link-review {
+	font-family: Roboto;
+	font-weight: 300;
+	font-size: 18px;
+	color: #4b4b4b;
+	line-height: normal;
+}

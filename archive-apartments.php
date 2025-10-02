@@ -35,6 +35,7 @@ get_header();
                 $terms = get_terms(array(
                     'taxonomy' => 'apartment_category',
                     'hide_empty' => true,
+                    'exclude' => array(4),
                 ));
 
                 if ($terms && !is_wp_error($terms)) :

@@ -136,7 +136,7 @@
                                     <img class="nav-link" src="<?php echo get_template_directory_uri(); ?>/img/ico/menu-decoration-point.svg" />
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link <?php echo is_page('contacts'); ?>" href="<?php echo get_permalink(get_page_by_path('contacts')); ?>">Контакты</a>
+                                    <a class="nav-link <?php echo is_page('kontakty') ? 'active' : ''; ?>" href="/kontakty/">Контакты</a>
                                 </li>
                             </ul>
                         </div>
@@ -203,7 +203,7 @@
                                     <img class="nav-link" src="<?php echo get_template_directory_uri(); ?>/img/ico/menu-decoration-point.svg" />
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link <?php echo is_page('contacts'); ?>" href="<?php echo get_permalink(get_page_by_path('contacts')); ?>">Контакты</a>
+                                    <a class="nav-link <?php echo is_page('kontakty') ? 'active' : ''; ?>" href="/kontakty/">Контакты</a>
                                 </li>
                             </ul>
                         </div>
@@ -257,7 +257,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="<?php echo get_permalink(get_page_by_path('contacts')); ?>" class="nav-link <?php echo is_page('contacts') ? 'active' : ''; ?>">Контакты</a>
+                                <a class="nav-link <?php echo is_page('kontakty') ? 'active' : ''; ?>" href="/kontakty/">Контакты</a>
                             </li>
 
                             <li class="nav-item d-lg-none">
@@ -297,23 +297,27 @@
         <div class="container">
             <div class="row align-items-center home-section-height">
                 <div class="col">
-                    <h1 class="home-title home-title-main mb-0 pb-0">
-                        <?php
-                        if (is_singular()) {
-                            the_title();
-                        } elseif (is_post_type_archive('apartments')) {
-                            echo 'Номера и цены';
-                        } elseif (is_archive()) {
-                            the_archive_title();
-                        } elseif (is_search()) {
-                            echo 'Результаты поиска: ' . get_search_query();
-                        } elseif (is_404()) {
-                            echo 'Страница не найдена';
-                        } else {
-                            bloginfo('name');
-                        }
-                        ?>
-                    </h1>
+                    <?php if (is_front_page() || is_home()): ?>
+                        <h1 class="home-title home-title-main mb-3 mb-xl-4 pb-0 pb-xl-3">Хостел «ГОРОДСКОЙ»</h1>
+                        <h2 class="home-subtitle home-title-main mb-3 mb-xl-4 pb-0 pb-xl-3">Новый и современный хостел в Рязани</h2>
+                        <a href="#" type="button" class="btn btn-corporate-color-1" data-bs-toggle="modal" data-bs-target="#callbackModal">Забронировать</a>
+                    <?php else: ?>
+                        <h1 class="home-title home-title-main mb-0 pb-0">
+                            <?php
+                            if (is_singular()) {
+                                the_title();
+                            } elseif (is_post_type_archive('apartments')) {
+                                echo 'Номера и цены';
+                            } elseif (is_archive()) {
+                                the_archive_title();
+                            } elseif (is_404()) {
+                                echo 'Страница не найдена';
+                            } else {
+                                bloginfo('name');
+                            }
+                            ?>
+                        </h1>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

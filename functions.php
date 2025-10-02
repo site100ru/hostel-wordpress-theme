@@ -143,7 +143,7 @@ add_action('after_setup_theme', function () {
 add_theme_support('post-thumbnails');
 add_theme_support('title-tag');
 
-// Регистрация кастомного типа записи "Квартиры/Номера"
+// Регистрация кастомного типа записи 
 function create_apartments_post_type()
 {
     $labels = array(
@@ -177,8 +177,35 @@ function create_apartments_post_type()
         'menu_position'         => 5,
         'menu_icon'             => 'dashicons-building',
         'supports'              => array('title', 'editor', 'thumbnail', 'excerpt'),
-        'show_in_rest'          => false, // Отключаем Gutenberg
+        'show_in_rest'          => false,
     );
+
+    // Отзывы (reviews)
+    register_post_type('reviews', [
+        'label' => null,
+        'labels' => [
+            'name' => 'Отзыв',
+            'singular_name' => 'Отзыв',
+            'add_new' => 'Добавить отзыв',
+            'add_new_item' => 'Добавление отзыва',
+            'edit_item' => 'Редактирование отзыва',
+            'new_item' => 'Новый отзыв',
+            'view_item' => 'Смотреть отзыв',
+            'search_items' => 'Искать отзыв',
+            'not_found' => 'Не найдено',
+            'not_found_in_trash' => 'Не найдено в корзине',
+            'menu_name' => 'Отзывы',
+        ],
+        'public' => true,
+        'show_in_menu' => true,
+        'menu_icon' => 'dashicons-groups',
+        'menu_position' => 20,
+        'hierarchical' => false,
+        'supports' => ['title', 'editor', 'thumbnail'],
+        'has_archive' => false,
+        'rewrite' => false,
+        'query_var' => false,
+    ]);
 
     register_post_type('apartments', $args);
 }
@@ -214,6 +241,50 @@ function create_apartments_taxonomy()
     register_taxonomy('apartment_category', array('apartments'), $args);
 }
 add_action('init', 'create_apartments_taxonomy');
+
+
+
+// Добавляем метабокс с полями
+add_action('add_meta_boxes', 'reviews_add_fields');
+function reviews_add_fields() {
+    add_meta_box('review_fields', 'Информация об отзыве', 'reviews_fields_html', 'reviews', 'normal');
+}
+
+// HTML полей
+function reviews_fields_html($post) {
+    $date = get_post_meta($post->ID, 'review_date', true) ?: date('d.m.Y');
+    $rating = get_post_meta($post->ID, 'review_rating', true) ?: 5;
+    ?>
+    <p>
+        <label><b>Дата отзыва:</b></label><br>
+        <input type="text" name="review_date" value="<?php echo esc_attr($date); ?>" style="width: 300px">
+        <span style="color: #666">(например: 24 декабря 2024)</span>
+    </p>
+    
+    <p>
+        <label><b>Количество звезд:</b></label><br>
+        <select name="review_rating" style="width: 150px">
+            <option value="1" <?php selected($rating, 1); ?>>1 звезда</option>
+            <option value="2" <?php selected($rating, 2); ?>>2 звезды</option>
+            <option value="3" <?php selected($rating, 3); ?>>3 звезды</option>
+            <option value="4" <?php selected($rating, 4); ?>>4 звезды</option>
+            <option value="5" <?php selected($rating, 5); ?>>5 звезд</option>
+        </select>
+    </p>
+    <?php
+}
+
+// Сохранение полей
+add_action('save_post_reviews', 'reviews_save_fields');
+function reviews_save_fields($post_id) {
+    if (isset($_POST['review_date'])) {
+        update_post_meta($post_id, 'review_date', sanitize_text_field($_POST['review_date']));
+    }
+    if (isset($_POST['review_rating'])) {
+        update_post_meta($post_id, 'review_rating', intval($_POST['review_rating']));
+    }
+}
+
 
 require_once get_template_directory() . '/inc/transliteration.php';
 
