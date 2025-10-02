@@ -29,11 +29,12 @@ get_header();
 
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 col-xl-6 mb-4 mb-md-0 section-image">
-                <div id="carousel-about-1" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
+                <div id="carousel-2691" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
                     <div class="carousel-inner rounded">
-                        <div class="carousel-item gallery-about-1-wrapper active">
-                            <button class="gallery-about-1 button-gallery" onClick="galleryOn('gallery-about-1');">
-                                <div class="-img approximation img-wrapper position-relative">
+                        <!-- Слайд 1 -->
+                        <div class="carousel-item gallery-2691-wrapper active">
+                            <button class="gallery-2691 button-gallery" onClick="galleryOn('gallery-2691');">
+                                <div class="single-product-img approximation img-wrapper position-relative">
                                     <img src="<?php echo get_template_directory_uri(); ?>/img/card-image-1.jpg" class="d-block w-100" loading="lazy" alt="..." />
                                     <div class="overlay">
                                         <img src="<?php echo get_template_directory_uri(); ?>/img/ico/magnifying-glass.svg" alt="Zoom" class="zoom-icon" />
@@ -41,9 +42,10 @@ get_header();
                                 </div>
                             </button>
                         </div>
-                        <div class="carousel-item gallery-about-1-wrapper">
-                            <button class="gallery-about-1 button-gallery" onClick="galleryOn('gallery-about-1');">
-                                <div class="-img approximation img-wrapper position-relative">
+                        <!-- Слайд 2 -->
+                        <div class="carousel-item gallery-2691-wrapper">
+                            <button class="gallery-2691 button-gallery" onClick="galleryOn('gallery-2691');">
+                                <div class="single-product-img approximation img-wrapper position-relative">
                                     <img src="<?php echo get_template_directory_uri(); ?>/img/card-image-2.jpg" class="d-block w-100" loading="lazy" alt="..." />
                                     <div class="overlay">
                                         <img src="<?php echo get_template_directory_uri(); ?>/img/ico/magnifying-glass.svg" alt="Zoom" class="zoom-icon" />
@@ -52,11 +54,12 @@ get_header();
                             </button>
                         </div>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-about-1" data-bs-slide="prev">
+                    <!-- Кнопки навигации слайдера -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-2691" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-about-1" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-2691" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -81,38 +84,7 @@ get_header();
     </div>
 </section>
 
-<!-- Gallery wrapper -->
-<div id="galleryWrapper" style="background: rgba(0, 0, 0, 0.85); display: none; position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: 9999">
-    <div id="gallery-about-1" class="carousel slide" data-bs-ride="false" data-bs-interval="false" style="display: none; position: fixed; top: 0; height: 100%; width: 100%">
-        <div class="carousel-inner h-100">
-            <div class="carousel-item carousel-item-2 h-100 active">
-                <div class="row align-items-center h-100">
-                    <div class="col text-center">
-                        <img src="<?php echo get_template_directory_uri(); ?>/img/card-image-1.jpg" class="img-fluid" loading="lazy" style="max-width: 75vw; max-height: 75vh" alt="..." />
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item carousel-item-2 h-100">
-                <div class="row align-items-center h-100">
-                    <div class="col text-center">
-                        <img src="<?php echo get_template_directory_uri(); ?>/img/card-image-2.jpg" class="img-fluid" loading="lazy" style="max-width: 75vw; max-height: 75vh" alt="..." />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#gallery-about-1" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#gallery-about-1" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-    <button type="button" onClick="closeGallery();" class="btn-close btn-close-white" style="position: fixed; top: 25px; right: 25px; z-index: 99999" aria-label="Close"></button>
-</div>
 
-<!-- Остальные секции с текстом -->
 <section class="section bg-light text-dark section-about service-page section-grid">
     <div class="container">
         <div class="section-title text-md-center">
@@ -140,20 +112,34 @@ get_header();
             <div class="d-none d-xl-block col-xl-1"></div>
 
             <div class="col-12 col-md-6 col-xl-6 mb-4 mb-md-0 section-image">
-                <div id="carousel-about-2" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
+                <div id="carousel-equipment" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
                     <div class="carousel-inner rounded">
-                        <div class="carousel-item active">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/card-image-1.jpg" class="d-block w-100" loading="lazy" alt="..." />
+                        <div class="carousel-item gallery-2691-wrapper active">
+                            <button class="gallery-2691 button-gallery" onClick="galleryOn('gallery-equipment');">
+                                <div class="single-product-img approximation img-wrapper position-relative">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/img/card-image-1.jpg" class="d-block w-100" loading="lazy" alt="..." />
+                                    <div class="overlay">
+                                        <img src="<?php echo get_template_directory_uri(); ?>/img/ico/magnifying-glass.svg" alt="Zoom" class="zoom-icon" />
+                                    </div>
+                                </div>
+                            </button>
                         </div>
-                        <div class="carousel-item">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/card-image-2.jpg" class="d-block w-100" loading="lazy" alt="..." />
+                        <div class="carousel-item gallery-2691-wrapper">
+                            <button class="gallery-2691 button-gallery" onClick="galleryOn('gallery-equipment');">
+                                <div class="single-product-img approximation img-wrapper position-relative">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/img/card-image-2.jpg" class="d-block w-100" loading="lazy" alt="..." />
+                                    <div class="overlay">
+                                        <img src="<?php echo get_template_directory_uri(); ?>/img/ico/magnifying-glass.svg" alt="Zoom" class="zoom-icon" />
+                                    </div>
+                                </div>
+                            </button>
                         </div>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-about-2" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-equipment" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-about-2" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-equipment" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -162,6 +148,57 @@ get_header();
         </div>
     </div>
 </section>
+
+<!-- Общая обертка для всех модальных окон галерей -->
+<div id="galleryWrapper" style="background: rgba(0, 0, 0, 0.85); display: none; position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: 9999">
+    
+    <!-- Модальное окно для слайдера equipment -->
+    <div id="gallery-equipment" class="carousel slide" data-bs-ride="false" data-bs-interval="false" style="display: none; position: fixed; top: 0; height: 100%; width: 100%">
+        <div class="carousel-inner h-100">
+            <div class="carousel-item carousel-item-2 h-100 active">
+                <div class="row align-items-center h-100">
+                    <div class="col text-center">
+                        <img src="<?php echo get_template_directory_uri(); ?>/img/card-image-1.jpg" class="img-fluid" loading="lazy" style="max-width: 75vw; max-height: 75vh" alt="..." />
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item carousel-item-2 h-100">
+                <div class="row align-items-center h-100">
+                    <div class="col text-center">
+                        <img src="<?php echo get_template_directory_uri(); ?>/img/card-image-2.jpg" class="img-fluid" loading="lazy" style="max-width: 75vw; max-height: 75vh" alt="..." />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#gallery-equipment" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#gallery-equipment" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Кнопка закрытия (одна для всех галерей) -->
+    <button type="button" onClick="closeGallery();" class="btn-close btn-close-white" style="position: fixed; top: 25px; right: 25px; z-index: 99999" aria-label="Close"></button>
+</div>
+
+<script>
+    function galleryOn(gal) {
+        document.getElementById('galleryWrapper').style.display = 'block';
+        document.getElementById(gal).style.display = 'block';
+    }
+
+    function closeGallery() {
+        document.getElementById('galleryWrapper').style.display = 'none';
+        // Закрываем все галереи
+        var galleries = document.querySelectorAll('#galleryWrapper .carousel');
+        galleries.forEach(function(gallery) {
+            gallery.style.display = 'none';
+        });
+    }
+</script>
 
 <section class="section bg-light text-dark section-about service-page section-grid">
     <div class="container">
