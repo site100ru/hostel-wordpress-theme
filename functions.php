@@ -116,9 +116,7 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
             // Для последнего пункта "Контакты" точку не показываем
             $output .= '
         <li class="nav-item d-none">
-            <span class="nav-link">
-                <img src="' . get_template_directory_uri() . '/img/ico/menu-decoration-point.svg" alt="">
-            </span>
+            <img class="nav-link" src="' . get_template_directory_uri() . '/img/ico/menu-decoration-point.svg" alt="">
         </li>
     ';
         } else if ($dropdown == false and $depth == 0) {
@@ -126,9 +124,7 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
             $visibility_class = $is_footer_menu ? '' : 'd-none d-xl-inline';
             $output .= '
         <li class="nav-item ' . $visibility_class . '">
-            <span class="nav-link">
-                <img src="' . get_template_directory_uri() . '/img/ico/menu-decoration-point.svg" alt="">
-            </span>
+            <img class="nav-link" src="' . get_template_directory_uri() . '/img/ico/menu-decoration-point.svg" alt="">
         </li>
     ';
         }
@@ -499,6 +495,63 @@ function mytheme_customize_register($wp_customize)
         'label' => 'Время работы',
         'description' => 'Укажите время работы',
         'section' => 'mytheme_contacts_job_time',
+        'type' => 'text',
+    ));
+
+    // GPS координаты
+    $wp_customize->add_section('mytheme_contacts_gps', array(
+        'title' => 'GPS координаты',
+        'panel' => 'contact_panel',
+        'priority' => 9.5
+    ));
+
+    $wp_customize->add_setting('mytheme_gps', array(
+        'default' => '',
+        'transport' => 'postMessage',
+    ));
+
+    $wp_customize->add_control('mytheme_gps', array(
+        'label' => 'GPS координаты',
+        'description' => 'Например: 54.600854, 39.721651',
+        'section' => 'mytheme_contacts_gps',
+        'type' => 'text',
+    ));
+
+    // Дополнительный телефон 1
+    $wp_customize->add_section('mytheme_contacts_phone_additional_1', array(
+        'title' => 'Дополнительный телефон 1',
+        'panel' => 'contact_panel',
+        'priority' => 5.5
+    ));
+
+    $wp_customize->add_setting('mytheme_additional_phone_1', array(
+        'default' => '',
+        'transport' => 'postMessage',
+    ));
+
+    $wp_customize->add_control('mytheme_additional_phone_1', array(
+        'label' => 'Дополнительный телефон 1',
+        'description' => 'Например: 8 (4912) 80-88-88',
+        'section' => 'mytheme_contacts_phone_additional_1',
+        'type' => 'text',
+    ));
+
+    // Дополнительный телефон 2
+    $wp_customize->add_section('mytheme_contacts_phone_additional_2', array(
+        'title' => 'Дополнительный телефон 2',
+        'panel' => 'contact_panel',
+        'priority' => 5.6
+    ));
+
+    $wp_customize->add_setting('mytheme_additional_phone_2', array(
+        'default' => '',
+        'transport' => 'postMessage',
+    ));
+
+    $wp_customize->add_control('mytheme_additional_phone_2', array(
+        'label' => 'Дополнительный телефон 2',
+        'description' => 'Например: 8 (800) 880-80-88',
+        'section' => 'mytheme_contacts_phone_additional_2',
         'type' => 'text',
     ));
 }

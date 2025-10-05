@@ -45,7 +45,7 @@
             <div class="col py-4">
                 <ul class="nav justify-content-center align-items-center">
                     <li class="nav-item me-1 me-lg-2">
-                        <a class="nav-link" href="#">
+                        <div class="nav-link" style="cursor: pointer;">
                             <div style="display: flex" class="align-items-center">
                                 <div class="nav-li-float-left">
                                     <img src="<?php echo get_template_directory_uri(); ?>/img/ico/location-ico.svg" />
@@ -55,10 +55,10 @@
                                 </div>
                                 <div style="clear: both"></div>
                             </div>
-                        </a>
+                        </div>
                     </li>
                     <li class="nav-item me-1 me-lg-2">
-                        <a class="nav-link" href="#">
+                        <div class="nav-link"  style="cursor: pointer;">
                             <div style="display: flex" class="align-items-center">
                                 <div class="nav-li-float-left">
                                     <img src="<?php echo get_template_directory_uri(); ?>/img/ico/clock-ico.svg" class="pt-1" />
@@ -68,7 +68,7 @@
                                 </div>
                                 <div style="clear: both"></div>
                             </div>
-                        </a>
+                        </div>
                     </li>
                     <li class="nav-item me-1 me-lg-2">
                         <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#callbackModal">
