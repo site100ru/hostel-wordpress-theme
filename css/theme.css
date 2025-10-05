@@ -543,6 +543,16 @@ a:hover {
 	line-height: 16px;
 }
 
+.tel.nav-li-float-right,
+.time.nav-li-float-right {
+    max-width: 100px;
+}
+
+.nav-link-text.map,
+.nav-link-text.time {
+    max-width: 200px;
+}
+
 /** End header nav top **/
 
 /** Header nav bottom **/

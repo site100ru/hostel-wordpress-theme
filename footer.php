@@ -1,5 +1,18 @@
 <!-- CONTACTS SECTION 4 -->
 <section class="contacts-section-4">
+    <?php
+    // Получаем все контакты из настроек темы
+    $country_code = get_theme_mod('mytheme_main_phone_country_code', '8');
+    $region_code = get_theme_mod('mytheme_main_phone_region_code', '800');
+    $phone_number = get_theme_mod('mytheme_main_phone_number', '880-80-88');
+    $phone_display = $country_code . ' (' . $region_code . ') ' . $phone_number;
+    $phone_link = preg_replace('/[^0-9+]/', '', $country_code . $region_code . $phone_number);
+    $address = get_theme_mod('mytheme_address', 'гор. Рязань, ул. Березовая, д. 1Д-К');
+    $job_time = get_theme_mod('mytheme_job_time', 'Пн-Вс, круглосуточно');
+    $telegram = get_theme_mod('mytheme_telegram', 'https://t.me/+79265930177');
+    $whatsapp = get_theme_mod('mytheme_whatsapp', 'https://wa.me/79265930177?web=1&app_absent=1');
+    ?>
+
     <!-- Desktop version -->
     <div class="container py-5 d-none d-xl-block">
         <div class="row align-items-center">
@@ -11,7 +24,7 @@
             <div class="col-xl-8">
                 <?php
                 wp_nav_menu(array(
-                    'theme_location' => 'footer-menu',
+                    'theme_location' => 'footer-menu-1',
                     'container' => false,
                     'menu_class' => '',
                     'fallback_cb' => '__return_false',
@@ -22,9 +35,9 @@
                 ?>
             </div>
             <div class="col-xl-2 text-end">
-                <a href="tel:+78008808088" class="contacts-phone">
+                <a href="tel:<?php echo esc_attr($phone_link); ?>" class="contacts-phone">
                     <img src="<?php echo get_template_directory_uri(); ?>/img/ico/mobile-phone-ico.svg" class="me-2" style="position: relative; bottom: 1px" />
-                    8 800 880-80-88
+                    <?php echo esc_html($phone_display); ?>
                 </a>
             </div>
         </div>
@@ -37,14 +50,8 @@
                                 <div class="nav-li-float-left">
                                     <img src="<?php echo get_template_directory_uri(); ?>/img/ico/location-ico.svg" />
                                 </div>
-                                <div class="nav-li-float-right">
-                                    <span>
-                                        гор. Рязань,
-                                        <br />
-                                        ул. Березовая,
-                                        <br />
-                                        д. 1Д-К
-                                    </span>
+                                <div class="nav-li-float-right tel">
+                                    <span><?php echo nl2br(esc_html($address)); ?></span>
                                 </div>
                                 <div style="clear: both"></div>
                             </div>
@@ -56,12 +63,8 @@
                                 <div class="nav-li-float-left">
                                     <img src="<?php echo get_template_directory_uri(); ?>/img/ico/clock-ico.svg" class="pt-1" />
                                 </div>
-                                <div class="nav-li-float-right">
-                                    <span>
-                                        Пн-Вс,
-                                        <br />
-                                        круглосуточно
-                                    </span>
+                                <div class="nav-li-float-right time">
+                                    <span><?php echo nl2br(esc_html($job_time)); ?></span>
                                 </div>
                                 <div style="clear: both"></div>
                             </div>
@@ -100,12 +103,12 @@
             <div class="col">
                 <ul class="nav justify-content-center">
                     <li class="nav-item">
-                        <a class="nav-link ico-button px-2" href="https://wa.me/79265930177?web=1&amp;app_absent=1">
+                        <a class="nav-link ico-button px-2" href="<?php echo esc_url($whatsapp); ?>">
                             <img src="<?php echo get_template_directory_uri(); ?>/img/ico/whatsapp-ico.svg" />
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ico-button px-2" href="https://t.me/+79265930177">
+                        <a class="nav-link ico-button px-2" href="<?php echo esc_url($telegram); ?>">
                             <img src="<?php echo get_template_directory_uri(); ?>/img/ico/telegram-ico.svg" />
                         </a>
                     </li>
@@ -140,7 +143,7 @@
                                     <img src="<?php echo get_template_directory_uri(); ?>/img/ico/location-ico.svg" />
                                 </div>
                                 <div class="nav-li-float-right">
-                                    <span>гор. Рязань, ул. Березовая, д. 1Д-К</span>
+                                    <span><?php echo esc_html($address); ?></span>
                                 </div>
                                 <div style="clear: both"></div>
                             </div>
@@ -153,7 +156,7 @@
                                     <img src="<?php echo get_template_directory_uri(); ?>/img/ico/clock-ico.svg" class="pt-1" />
                                 </div>
                                 <div class="nav-li-float-right">
-                                    <span>Пн-Вс, круглосуточно</span>
+                                    <span><?php echo esc_html($job_time); ?></span>
                                 </div>
                                 <div style="clear: both"></div>
                             </div>
@@ -186,23 +189,23 @@
                         </a>
                     </li>
                 </ul>
-                <a href="tel:+78008808088" class="contacts-phone">
+                <a href="tel:<?php echo esc_attr($phone_link); ?>" class="contacts-phone">
                     <div style="display: flex" class="align-items-center">
                         <div class="nav-li-float-left">
                             <img src="<?php echo get_template_directory_uri(); ?>/img/ico/mobile-phone-ico.svg" style="position: relative; bottom: 1px" />
                         </div>
-                        <div class="nav-li-float-right">8 (800) 880-80-88</div>
+                        <div class="nav-li-float-right"><?php echo esc_html($phone_display); ?></div>
                         <div style="clear: both"></div>
                     </div>
                 </a>
                 <ul class="nav pt-4 pb-3">
                     <li class="nav-item">
-                        <a class="nav-link ico-button ps-0 pe-2" href="https://wa.me/79265930177?web=1&amp;app_absent=1">
+                        <a class="nav-link ico-button ps-0 pe-2" href="<?php echo esc_url($whatsapp); ?>">
                             <img src="<?php echo get_template_directory_uri(); ?>/img/ico/whatsapp-ico.svg" />
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ico-button px-2" href="https://t.me/+79265930177">
+                        <a class="nav-link ico-button px-2" href="<?php echo esc_url($telegram); ?>">
                             <img src="<?php echo get_template_directory_uri(); ?>/img/ico/telegram-ico.svg" />
                         </a>
                     </li>

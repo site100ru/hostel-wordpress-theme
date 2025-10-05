@@ -80,7 +80,20 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
         $attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
         $attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
 
-        $active_class = ($item->current || $item->current_item_ancestor || in_array("current_page_parent", $item_classes, true) || in_array("current-post-ancestor", $item_classes, true)) ? 'active' : '';
+        // Проверяем активный класс
+        $is_active = $item->current || $item->current_item_ancestor || in_array("current_page_parent", $item_classes, true) || in_array("current-post-ancestor", $item_classes, true);
+
+        if (!$is_active && (is_post_type_archive() || is_singular())) {
+            $current_post_type = get_post_type();
+            if ($current_post_type) {
+                $archive_link = get_post_type_archive_link($current_post_type);
+                if ($archive_link && strpos($item->url, $archive_link) !== false) {
+                    $is_active = true;
+                }
+            }
+        }
+
+        $active_class = $is_active ? 'active' : '';
         $nav_link_class = ($depth > 0) ? 'dropdown-item header-link ' : 'nav-link header-link ';
         $attributes .= ($args->walker->has_children) ? ' class="' . $nav_link_class . $active_class . ' dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : ' class="' . $nav_link_class . $active_class . '"';
 
@@ -92,7 +105,6 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
 
         $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
 
-        // Показываем точки в меню, первый вариант
         // Показываем точки в меню
         $item_title = $item->title;
         $dropdown = in_array('dropdown', $classes);
@@ -134,7 +146,9 @@ add_action('after_setup_theme', function () {
         'contacts-desktop-menu' => 'Contacts desktop menu',
         'navbarSupportedContent2' => 'navbarSupportedContent2',
         'footer-menu-1' => 'footer-menu-1',
-        'footer-menu-2' => 'footer-menu-2'
+        'footer-menu-2' => 'footer-menu-2',
+        'footer-menu-left' => 'footer-menu-left',
+        'footer-menu-right' => 'footer-menu-right'
     ]);
 });
 /* End register a new menu */
@@ -246,21 +260,23 @@ add_action('init', 'create_apartments_taxonomy');
 
 // Добавляем метабокс с полями
 add_action('add_meta_boxes', 'reviews_add_fields');
-function reviews_add_fields() {
+function reviews_add_fields()
+{
     add_meta_box('review_fields', 'Информация об отзыве', 'reviews_fields_html', 'reviews', 'normal');
 }
 
 // HTML полей
-function reviews_fields_html($post) {
+function reviews_fields_html($post)
+{
     $date = get_post_meta($post->ID, 'review_date', true) ?: date('d.m.Y');
     $rating = get_post_meta($post->ID, 'review_rating', true) ?: 5;
-    ?>
+?>
     <p>
         <label><b>Дата отзыва:</b></label><br>
         <input type="text" name="review_date" value="<?php echo esc_attr($date); ?>" style="width: 300px">
         <span style="color: #666">(например: 24 декабря 2024)</span>
     </p>
-    
+
     <p>
         <label><b>Количество звезд:</b></label><br>
         <select name="review_rating" style="width: 150px">
@@ -271,12 +287,13 @@ function reviews_fields_html($post) {
             <option value="5" <?php selected($rating, 5); ?>>5 звезд</option>
         </select>
     </p>
-    <?php
+<?php
 }
 
 // Сохранение полей
 add_action('save_post_reviews', 'reviews_save_fields');
-function reviews_save_fields($post_id) {
+function reviews_save_fields($post_id)
+{
     if (isset($_POST['review_date'])) {
         update_post_meta($post_id, 'review_date', sanitize_text_field($_POST['review_date']));
     }

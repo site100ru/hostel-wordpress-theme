@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900">
     <?php wp_head(); ?>
 </head>
-
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
 
@@ -23,21 +22,21 @@
                         <div class="collapse navbar-collapse">
                             <ul class="navbar-nav ms-auto align-items-center">
                                 <li class="nav-item me-3 me-md-1 me-xl-5">
-                                    <div class="nav-link d-flex align-items-center gap-3 gap-md-2 gap-xl-3 lh-1 nav-link-text" style="cursor: pointer">
+                                    <div class="nav-link d-flex align-items-center gap-3 gap-md-2 gap-xl-3 lh-1 nav-link-text map" style="cursor: pointer">
                                         <img src="<?php echo get_template_directory_uri(); ?>/img/ico/location-ico.svg" />
-                                        гор. Рязань,
-                                        <br />
-                                        ул. Березовая,
-                                        <br />
-                                        д. 1Д-К
+                                        <?php 
+                                        $address = get_theme_mod('mytheme_address', 'гор. Рязань, ул. Березовая, д. 1Д-К');
+                                        echo nl2br(esc_html($address));
+                                        ?>
                                     </div>
                                 </li>
                                 <li class="nav-item me-3 me-md-1 me-xl-5">
-                                    <div class="nav-link d-flex align-items-center gap-3 gap-md-2 gap-xl-3 lh-1 nav-link-text" style="cursor: pointer">
+                                    <div class="nav-link d-flex align-items-center gap-3 gap-md-2 gap-xl-3 lh-1 nav-link-text time" style="cursor: pointer">
                                         <img src="<?php echo get_template_directory_uri(); ?>/img/ico/clock-ico.svg" />
-                                        Пн-Вс,
-                                        <br />
-                                        круглосуточно
+                                        <?php 
+                                        $job_time = get_theme_mod('mytheme_job_time', 'Пн-Вс, круглосуточно');
+                                        echo nl2br(esc_html($job_time));
+                                        ?>
                                     </div>
                                 </li>
 
@@ -62,20 +61,33 @@
                                 </li>
 
                                 <li class="nav-item me-3 me-md-1 me-xl-5">
-                                    <a class="top-menu-tel nav-link" href="tel:+78008808088">
+                                    <?php 
+                                    $country_code = get_theme_mod('mytheme_main_phone_country_code', '8');
+                                    $region_code = get_theme_mod('mytheme_main_phone_region_code', '800');
+                                    $phone_number = get_theme_mod('mytheme_main_phone_number', '880-80-88');
+                                    $phone_display = $country_code . ' (' . $region_code . ') ' . $phone_number;
+                                    $phone_link = preg_replace('/[^0-9+]/', '', $country_code . $region_code . $phone_number);
+                                    ?>
+                                    <a class="top-menu-tel nav-link" href="tel:<?php echo esc_attr($phone_link); ?>">
                                         <img src="<?php echo get_template_directory_uri(); ?>/img/ico/mobile-phone-ico.svg" />
-                                        8 (800) 880-80-88
+                                        <?php echo esc_html($phone_display); ?>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link ico-button" href="https://t.me/+79265930177">
+                                    <?php 
+                                    $telegram = get_theme_mod('mytheme_telegram', 'https://t.me/+79265930177');
+                                    ?>
+                                    <a class="nav-link ico-button" href="<?php echo esc_url($telegram); ?>">
                                         <img src="<?php echo get_template_directory_uri(); ?>/img/ico/telegram-ico.svg" />
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link ico-button" href="https://wa.me/79265930177?web=1&amp;app_absent=1">
+                                    <?php 
+                                    $whatsapp = get_theme_mod('mytheme_whatsapp', 'https://wa.me/79265930177?web=1&app_absent=1');
+                                    ?>
+                                    <a class="nav-link ico-button" href="<?php echo esc_url($whatsapp); ?>">
                                         <img src="<?php echo get_template_directory_uri(); ?>/img/ico/whatsapp-ico.svg" />
                                     </a>
                                 </li>
@@ -92,12 +104,21 @@
                         </a>
 
                         <div class="d-none d-sm-block d-lg-none flex-column top-menu-tel-wrapper gap-1 my-2">
-                            <a class="top-menu-tel nav-link" href="tel:+74994082271"> +7 499 408 22 71 </a>
+                            <?php 
+                            $country_code = get_theme_mod('mytheme_main_phone_country_code', '8');
+                            $region_code = get_theme_mod('mytheme_main_phone_region_code', '800');
+                            $phone_number = get_theme_mod('mytheme_main_phone_number', '880-80-88');
+                            $phone_display = $country_code . ' (' . $region_code . ') ' . $phone_number;
+                            $phone_link = preg_replace('/[^0-9+]/', '', $country_code . $region_code . $phone_number);
+                            ?>
+                            <a class="top-menu-tel nav-link" href="tel:<?php echo esc_attr($phone_link); ?>"> <?php echo esc_html($phone_display); ?> </a>
 
                             <p class="nav-link d-flex align-items-center gap-3 lh-1 mb-0">
                                 <img src="<?php echo get_template_directory_uri(); ?>/img/ico/clock-ico.svg" />
-                                Ежедневно
-                                <br />с 9:00 до 21:00
+                                <?php 
+                                $job_time = get_theme_mod('mytheme_job_time', 'Пн-Вс, круглосуточно');
+                                echo nl2br(esc_html($job_time));
+                                ?>
                             </p>
                         </div>
 
@@ -113,32 +134,17 @@
                         </button>
 
                         <div class="collapse navbar-collapse" id="mobail-header-collapse">
-                            <ul class="navbar-nav align-items-start align-items-lg-center ms-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link <?php echo is_front_page() ? 'active' : ''; ?>" href="<?php echo home_url('/'); ?>">Главная</a>
-                                </li>
-                                <li class="nav-item d-none d-lg-inline">
-                                    <img class="nav-link" src="<?php echo get_template_directory_uri(); ?>/img/ico/menu-decoration-point.svg" />
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link <?php echo is_post_type_archive('apartments') || is_singular('apartments') ? 'active' : ''; ?>" href="<?php echo get_post_type_archive_link('apartments'); ?>">Номера и цены</a>
-                                </li>
-
-                                <li class="nav-item d-none d-lg-inline">
-                                    <img class="nav-link" src="<?php echo get_template_directory_uri(); ?>/img/ico/menu-decoration-point.svg" />
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link <?php echo is_page('about'); ?>" href="<?php echo get_permalink(get_page_by_path('about')); ?>">О хостеле</a>
-                                </li>
-
-                                <li class="nav-item d-none d-lg-inline">
-                                    <img class="nav-link" src="<?php echo get_template_directory_uri(); ?>/img/ico/menu-decoration-point.svg" />
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link <?php echo is_page('kontakty') ? 'active' : ''; ?>" href="/kontakty/">Контакты</a>
-                                </li>
-                            </ul>
+                            <?php
+                            wp_nav_menu(array(
+                                'theme_location' => 'mobail-header-collapse',
+                                'container' => false,
+                                'menu_class' => 'navbar-nav align-items-start align-items-lg-center ms-auto mb-2 mb-lg-0',
+                                'fallback_cb' => '__return_false',
+                                'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                                'depth' => 2,
+                                'walker' => new bootstrap_5_wp_nav_menu_walker()
+                            ));
+                            ?>
                         </div>
                     </div>
                 </nav>
@@ -156,13 +162,21 @@
 
                         <div class="d-lg-none">
                             <div class="d-none d-sm-block d-lg-none flex-column top-menu-tel-wrapper gap-1 my-2">
-                                <a class="top-menu-tel nav-link" href="tel:+78008808088"> 8 (800) 880-80-88 </a>
+                                <?php 
+                                $country_code = get_theme_mod('mytheme_main_phone_country_code', '8');
+                                $region_code = get_theme_mod('mytheme_main_phone_region_code', '800');
+                                $phone_number = get_theme_mod('mytheme_main_phone_number', '880-80-88');
+                                $phone_display = $country_code . ' (' . $region_code . ') ' . $phone_number;
+                                $phone_link = preg_replace('/[^0-9+]/', '', $country_code . $region_code . $phone_number);
+                                ?>
+                                <a class="top-menu-tel nav-link" href="tel:<?php echo esc_attr($phone_link); ?>"> <?php echo esc_html($phone_display); ?> </a>
 
                                 <p class="nav-link d-flex align-items-center gap-3 lh-1 mb-0" style="font-size: 14px">
                                     <img src="<?php echo get_template_directory_uri(); ?>/img/ico/clock-ico.svg" />
-                                    Пн-Вс,
-                                    <br />
-                                    круглосуточно
+                                    <?php 
+                                    $job_time = get_theme_mod('mytheme_job_time', 'Пн-Вс, круглосуточно');
+                                    echo nl2br(esc_html($job_time));
+                                    ?>
                                 </p>
                             </div>
                         </div>
@@ -179,33 +193,17 @@
                         </button>
 
                         <div class="collapse navbar-collapse" id="sliding-header-collapse">
-                            <ul class="navbar-nav align-items-start align-items-lg-center ms-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link <?php echo is_front_page() ? 'active' : ''; ?>" href="<?php echo home_url('/'); ?>">Главная</a>
-                                </li>
-                                <li class="nav-item d-none d-lg-inline">
-                                    <img class="nav-link" src="<?php echo get_template_directory_uri(); ?>/img/ico/menu-decoration-point.svg" />
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link <?php echo is_post_type_archive('apartments') || is_singular('apartments') ? 'active' : ''; ?>" href="<?php echo get_post_type_archive_link('apartments'); ?>">Номера и цены</a>
-                                </li>
-
-                                <li class="nav-item d-none d-lg-inline">
-                                    <img class="nav-link" src="<?php echo get_template_directory_uri(); ?>/img/ico/menu-decoration-point.svg" />
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link <?php echo is_page('about'); ?>" href="<?php echo get_permalink(get_page_by_path('about')); ?>">О хостеле</a>
-                                </li>
-
-                                <li class="nav-item d-none d-lg-inline">
-                                    <img class="nav-link" src="<?php echo get_template_directory_uri(); ?>/img/ico/menu-decoration-point.svg" />
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link <?php echo is_page('kontakty') ? 'active' : ''; ?>" href="/kontakty/">Контакты</a>
-                                </li>
-                            </ul>
+                            <?php
+                            wp_nav_menu(array(
+                                'theme_location' => 'sliding-header-collapse',
+                                'container' => false,
+                                'menu_class' => 'navbar-nav align-items-start align-items-lg-center ms-auto mb-2 mb-lg-0',
+                                'fallback_cb' => '__return_false',
+                                'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                                'depth' => 2,
+                                'walker' => new bootstrap_5_wp_nav_menu_walker()
+                            ));
+                            ?>
                         </div>
                     </div>
                 </nav>
@@ -223,12 +221,20 @@
                     </a>
 
                     <div class="d-lg-none">
-                        <a class="top-menu-tel pt-1 pb-0" style="font-size: 14px" href="tel:+78008808088">8 (800) 880-80-88</a>
+                        <?php 
+                        $country_code = get_theme_mod('mytheme_main_phone_country_code', '8');
+                        $region_code = get_theme_mod('mytheme_main_phone_region_code', '800');
+                        $phone_number = get_theme_mod('mytheme_main_phone_number', '880-80-88');
+                        $phone_display = $country_code . ' (' . $region_code . ') ' . $phone_number;
+                        $phone_link = preg_replace('/[^0-9+]/', '', $country_code . $region_code . $phone_number);
+                        $job_time = get_theme_mod('mytheme_job_time', 'Пн-Вс, круглосуточно');
+                        ?>
+                        <a class="top-menu-tel pt-1 pb-0" style="font-size: 14px" href="tel:<?php echo esc_attr($phone_link); ?>"><?php echo esc_html($phone_display); ?></a>
                         <div style="font-size: 10px; font-family: Gilroy; font-weight: 300; text-transform: none">
                             <img
                                 src="<?php echo get_template_directory_uri(); ?>/img/ico/clock-ico.svg"
                                 style="width: 12px; position: relative; top: -1px"
-                                class="me-1" />Пн-Вс, круглосуточно
+                                class="me-1" /><?php echo esc_html($job_time); ?>
                         </div>
                     </div>
 
@@ -243,52 +249,18 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="navbar-collapse collapse" id="sliding-header-collapse">
-                        <ul id="menu-main-menu" class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a href="<?php echo home_url('/'); ?>" class="nav-link <?php echo is_front_page() ? 'active' : ''; ?>">Главная</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo get_post_type_archive_link('apartments'); ?>" class="nav-link <?php echo is_post_type_archive('apartments') || is_singular('apartments') ? 'active' : ''; ?>">Номера и цены</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="<?php echo get_permalink(get_page_by_path('about')); ?>" class="nav-link <?php echo is_page('about') ? 'active' : ''; ?>">О хостеле</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link <?php echo is_page('kontakty') ? 'active' : ''; ?>" href="/kontakty/">Контакты</a>
-                            </li>
-
-                            <li class="nav-item d-lg-none">
-                                <button class="nav-link text-dark" data-bs-toggle="modal" data-bs-target="#callbackModal">Обратный звонок</button>
-                            </li>
-                            <li class="nav-item d-lg-none">
-                                <button class="nav-link text-dark" data-bs-toggle="modal" data-bs-target="#callbackModal">Забронировать</button>
-                            </li>
-
-                            <li class="nav-item d-lg-none">
-                                <div style="font-size: 12px; font-family: HelveticaNeueCyr; text-transform: none; font-weight: 300">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/img/ico/location-ico.svg" style="width: 13px" class="me-1" />
-                                    <span>гор. Рязань, ул. Березовая, д. 1Д-К</span>
-                                </div>
-                                <a class="nav-link top-menu-tel pt-1 pb-1" href="tel:+78008808088">8 (800) 880-80-88</a>
-                                <div class="mb-2" style="font-size: 12px; font-family: HelveticaNeueCyr; text-transform: none; font-weight: 300">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/img/ico/clock-ico.svg" style="width: 10px; position: relative; top: 2px" class="me-1 mb-2" />
-                                    Пн-Вс, круглосуточно
-                                </div>
-                            </li>
-                            <li class="nav-item d-lg-none pb-4">
-                                <a class="ico-button pe-0" href="https://t.me/+79265930177">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/img/ico/telegram-ico.svg" />
-                                </a>
-
-                                <a class="ico-button pe-2" href="https://wa.me/79265930177?web=1&amp;app_absent=1">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/img/ico/whatsapp-ico.svg" />
-                                </a>
-                            </li>
-                            <!-- End mobile menu -->
-                        </ul>
+                    <div class="navbar-collapse collapse" id="sliding-header-collapse-mobile">
+                        <?php
+                        wp_nav_menu(array(
+                            'theme_location' => 'main-menu',
+                            'container' => false,
+                            'menu_class' => 'navbar-nav ms-auto mb-2 mb-lg-0',
+                            'fallback_cb' => '__return_false',
+                            'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                            'depth' => 2,
+                            'walker' => new bootstrap_5_wp_nav_menu_walker()
+                        ));
+                        ?>
                     </div>
                 </div>
             </nav>
