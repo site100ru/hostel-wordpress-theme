@@ -663,3 +663,29 @@ function mytheme_enqueue_assets()
     wp_enqueue_style('theme-style', get_template_directory_uri() . '/css/theme.css');
 }
 add_action('wp_enqueue_scripts', 'mytheme_enqueue_assets');
+
+
+/*** ДЕЛАЕМ ПРАВИЛЬНЫЙ DESCRIPTION ДЛЯ КАЖДОЙ СТРАНИЦЫ ***/
+function echo_description()
+{
+
+    // Если страница стандартной категории поста
+    if (is_category()) {
+        echo wp_strip_all_tags(category_description());
+
+        // Если страница продукта woocommerce
+    } elseif (is_post_type_archive('portfolio')) {
+        echo 'Портфолио';
+
+        // Если страница категорий портфолио
+    } elseif (is_tax('portfolio-cat')) {
+        $term = get_queried_object(); // Получаем текущий термин
+        echo $term->description;
+        //echo 'Категория портфолио';
+
+        // Если страница магазина	
+    } else {
+        echo get_the_excerpt();
+    }
+}
+/*** END ДЕЛАЕМ ПРАВИЛЬНЫЙ DESCRIPTION ДЛЯ КАЖДОЙ СТРАНИЦЫ ***/
