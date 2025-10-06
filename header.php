@@ -1,10 +1,39 @@
+<?php
+
+session_start();
+
+if (isset($_SESSION['win'])) {
+    unset($_SESSION['win']);
+    $_SESSION['display'] = "block";
+} else {
+    $_SESSION['display'] = "none";
+}
+
+?>
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
 <head>
-    <meta charset="<?php bloginfo('charset'); ?>">
+    <!-- Meta tags -->
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900">
+    <meta name="description" content="<?php echo_description(); ?>" />
+    <meta property="og:description" content="<?php echo_description(); ?>" />
+    <meta name="keywords" content="<?php echo wp_get_document_title(); ?>" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
+    <meta property="og:title" content="<?php echo wp_get_document_title(); ?>" />
+
+    <title><?php echo wp_get_document_title(); ?></title>
+
+    <?php if ($counter_head = get_theme_mod('mytheme_counter_head')): ?>
+        <!-- Код счетчика в (head) -->
+        <?php echo $counter_head; ?>
+    <?php endif; ?>
+
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -24,7 +53,7 @@
                                 <li class="nav-item me-3 me-md-1 me-xl-5">
                                     <div class="nav-link d-flex align-items-center gap-3 gap-md-2 gap-xl-3 lh-1 nav-link-text map" style="cursor: pointer">
                                         <img src="<?php echo get_template_directory_uri(); ?>/img/ico/location-ico.svg" />
-                                        <?php 
+                                        <?php
                                         $address = get_theme_mod('mytheme_address', 'гор. Рязань, ул. Березовая, д. 1Д-К');
                                         echo nl2br(esc_html($address));
                                         ?>
@@ -33,7 +62,7 @@
                                 <li class="nav-item me-3 me-md-1 me-xl-5">
                                     <div class="nav-link d-flex align-items-center gap-3 gap-md-2 gap-xl-3 lh-1 nav-link-text time" style="cursor: pointer">
                                         <img src="<?php echo get_template_directory_uri(); ?>/img/ico/clock-ico.svg" />
-                                        <?php 
+                                        <?php
                                         $job_time = get_theme_mod('mytheme_job_time', 'Пн-Вс, круглосуточно');
                                         echo nl2br(esc_html($job_time));
                                         ?>
@@ -54,14 +83,14 @@
                                     <button
                                         class="top-menu-tel nav-link d-flex align-items-center gap-3 gap-md-2 gap-xl-3 lh-1"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#callbackModal">
+                                        data-bs-target="#bookingModal">
                                         <img src="<?php echo get_template_directory_uri(); ?>/img/ico/location-ico.svg" />
                                         Забронировать
                                     </button>
                                 </li>
 
                                 <li class="nav-item me-3 me-md-1 me-xl-5">
-                                    <?php 
+                                    <?php
                                     $country_code = get_theme_mod('mytheme_main_phone_country_code', '8');
                                     $region_code = get_theme_mod('mytheme_main_phone_region_code', '800');
                                     $phone_number = get_theme_mod('mytheme_main_phone_number', '880-80-88');
@@ -75,7 +104,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <?php 
+                                    <?php
                                     $telegram = get_theme_mod('mytheme_telegram', 'https://t.me/+79265930177');
                                     ?>
                                     <a class="nav-link ico-button" href="<?php echo esc_url($telegram); ?>">
@@ -84,7 +113,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <?php 
+                                    <?php
                                     $whatsapp = get_theme_mod('mytheme_whatsapp', 'https://wa.me/79265930177?web=1&app_absent=1');
                                     ?>
                                     <a class="nav-link ico-button" href="<?php echo esc_url($whatsapp); ?>">
@@ -104,7 +133,7 @@
                         </a>
 
                         <div class="d-none d-sm-block d-lg-none flex-column top-menu-tel-wrapper gap-1 my-2">
-                            <?php 
+                            <?php
                             $country_code = get_theme_mod('mytheme_main_phone_country_code', '8');
                             $region_code = get_theme_mod('mytheme_main_phone_region_code', '800');
                             $phone_number = get_theme_mod('mytheme_main_phone_number', '880-80-88');
@@ -115,7 +144,7 @@
 
                             <p class="nav-link d-flex align-items-center gap-3 lh-1 mb-0">
                                 <img src="<?php echo get_template_directory_uri(); ?>/img/ico/clock-ico.svg" />
-                                <?php 
+                                <?php
                                 $job_time = get_theme_mod('mytheme_job_time', 'Пн-Вс, круглосуточно');
                                 echo nl2br(esc_html($job_time));
                                 ?>
@@ -152,7 +181,7 @@
             <!-- /Header nav top -->
 
             <!-- Header nav bottom -->
-            <header id="sliding-header" class="shadow">
+            <header id="sliding-header" class="shadow d-none d-lg-block">
                 <!-- Header nav bottom -->
                 <nav class="header-nav-bottom navbar navbar-expand-lg navbar-light py-lg-0">
                     <div class="container">
@@ -162,7 +191,7 @@
 
                         <div class="d-lg-none">
                             <div class="d-none d-sm-block d-lg-none flex-column top-menu-tel-wrapper gap-1 my-2">
-                                <?php 
+                                <?php
                                 $country_code = get_theme_mod('mytheme_main_phone_country_code', '8');
                                 $region_code = get_theme_mod('mytheme_main_phone_region_code', '800');
                                 $phone_number = get_theme_mod('mytheme_main_phone_number', '880-80-88');
@@ -173,7 +202,7 @@
 
                                 <p class="nav-link d-flex align-items-center gap-3 lh-1 mb-0" style="font-size: 14px">
                                     <img src="<?php echo get_template_directory_uri(); ?>/img/ico/clock-ico.svg" />
-                                    <?php 
+                                    <?php
                                     $job_time = get_theme_mod('mytheme_job_time', 'Пн-Вс, круглосуточно');
                                     echo nl2br(esc_html($job_time));
                                     ?>
@@ -212,7 +241,7 @@
             <!-- /Header nav bottom -->
         </section>
 
-        <header id="sliding-header" class="shadow">
+        <header id="sliding-header" class="shadow d-lg-none">
             <!-- Header nav bottom -->
             <nav class="header-nav-bottom navbar navbar-expand-lg navbar-light py-1 py-lg-0">
                 <div class="container">
@@ -221,7 +250,7 @@
                     </a>
 
                     <div class="d-lg-none">
-                        <?php 
+                        <?php
                         $country_code = get_theme_mod('mytheme_main_phone_country_code', '8');
                         $region_code = get_theme_mod('mytheme_main_phone_region_code', '800');
                         $phone_number = get_theme_mod('mytheme_main_phone_number', '880-80-88');
@@ -242,8 +271,8 @@
                         class="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#sliding-header-collapse"
-                        aria-controls="sliding-header-collapse"
+                        data-bs-target="#sliding-header-collapse-mobile"
+                        aria-controls="sliding-header-collapse-mobile"
                         aria-expanded="false"
                         aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -272,7 +301,7 @@
                     <?php if (is_front_page() || is_home()): ?>
                         <h1 class="home-title home-title-main mb-3 mb-xl-4 pb-0 pb-xl-3">Хостел «ГОРОДСКОЙ»</h1>
                         <h2 class="home-subtitle home-title-main mb-3 mb-xl-4 pb-0 pb-xl-3">Новый и современный хостел в Рязани</h2>
-                        <a href="#" type="button" class="btn btn-corporate-color-1" data-bs-toggle="modal" data-bs-target="#callbackModal">Забронировать</a>
+                        <a href="#" type="button" class="btn btn-corporate-color-1" data-bs-toggle="modal" data-bs-target="#bookingModal">Забронировать</a>
                     <?php else: ?>
                         <h1 class="home-title home-title-main mb-0 pb-0">
                             <?php

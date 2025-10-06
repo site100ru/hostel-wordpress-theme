@@ -252,6 +252,105 @@ function create_apartments_taxonomy()
 }
 add_action('init', 'create_apartments_taxonomy');
 
+// Поле "Порядок" при ДОБАВЛЕНИИ категории
+add_action('apartment_category_add_form_fields', function () {
+?>
+    <div class="form-field">
+        <label for="term_order">Порядок</label>
+        <input type="number" name="term_order" id="term_order" value="0">
+        <p>Введите число для сортировки</p>
+    </div>
+<?php
+});
+
+// Поле "Порядок" при РЕДАКТИРОВАНИИ категории
+add_action('apartment_category_edit_form_fields', function ($term) {
+    $order = get_term_meta($term->term_id, 'term_order', true);
+?>
+    <tr>
+        <th>Порядок</th>
+        <td>
+            <input type="number" name="term_order" value="<?php echo esc_attr($order); ?>">
+        </td>
+    </tr>
+    <?php
+});
+
+// Поле в быстром редактировании (Свойства)
+add_action('quick_edit_custom_box', function ($column_name, $screen, $taxonomy) {
+    if ($column_name === 'order' && $taxonomy === 'apartment_category') {
+    ?>
+        <fieldset>
+            <div class="inline-edit-col">
+                <label>
+                    <span class="title">Порядок</span>
+                    <span class="input-text-wrap">
+                        <input type="number" name="term_order" value="" class="term-order-input">
+                    </span>
+                </label>
+            </div>
+        </fieldset>
+        <script>
+            jQuery(document).ready(function($) {
+                $(document).on('click', '.editinline', function() {
+                    var term_id = $(this).closest('tr').attr('id').replace('tag-', '');
+                    var order = $(this).closest('tr').find('.column-order').text().trim();
+                    $('.term-order-input').val(order);
+                });
+
+                $(document).on('click', '.cancel', function() {
+                    $('.term-order-input').val('');
+                });
+            });
+        </script>
+    <?php
+    }
+}, 10, 3);
+
+// Сохранить при создании
+add_action('created_apartment_category', function ($term_id) {
+    if (isset($_POST['term_order'])) {
+        update_term_meta($term_id, 'term_order', intval($_POST['term_order']));
+    }
+});
+
+// Сохранить при редактировании
+add_action('edited_apartment_category', function ($term_id) {
+    if (isset($_POST['term_order'])) {
+        update_term_meta($term_id, 'term_order', intval($_POST['term_order']));
+    }
+});
+
+// Показать колонку "Порядок"
+add_filter('manage_edit-apartment_category_columns', function ($columns) {
+    $columns['order'] = 'Порядок';
+    return $columns;
+});
+
+// Показывает значение порядка в колонке админки
+add_filter('manage_apartment_category_custom_column', function ($content, $column_name, $term_id) {
+    if ($column_name === 'order') {
+        $order = get_term_meta($term_id, 'term_order', true);
+        $content = $order ? $order : '0';
+    }
+    return $content;
+}, 10, 3);
+
+// Сортировка по порядку в колонке админки
+add_filter('get_terms', function ($terms, $taxonomies) {
+    if (in_array('apartment_category', $taxonomies) && is_array($terms)) {
+        usort($terms, function ($a, $b) {
+            // Проверка что это объекты
+            if (!is_object($a) || !is_object($b)) {
+                return 0;
+            }
+            $order_a = get_term_meta($a->term_id, 'term_order', true) ?: 0;
+            $order_b = get_term_meta($b->term_id, 'term_order', true) ?: 0;
+            return $order_a - $order_b;
+        });
+    }
+    return $terms;
+}, 10, 2);
 
 
 // Добавляем метабокс с полями
@@ -266,7 +365,7 @@ function reviews_fields_html($post)
 {
     $date = get_post_meta($post->ID, 'review_date', true) ?: date('d.m.Y');
     $rating = get_post_meta($post->ID, 'review_rating', true) ?: 5;
-?>
+    ?>
     <p>
         <label><b>Дата отзыва:</b></label><br>
         <input type="text" name="review_date" value="<?php echo esc_attr($date); ?>" style="width: 300px">

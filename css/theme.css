@@ -545,12 +545,12 @@ a:hover {
 
 .tel.nav-li-float-right,
 .time.nav-li-float-right {
-    max-width: 100px;
+	max-width: 100px;
 }
 
 .nav-link-text.map,
 .nav-link-text.time {
-    max-width: 200px;
+	max-width: 200px;
 }
 
 /** End header nav top **/
@@ -2921,4 +2921,48 @@ footer {
 	line-height: normal;
 }
 
-.tests{}
+@media (min-width: 992px) {
+	.modal-lg,
+	.modal-xl {
+		--bs-modal-width: 756px;
+	}
+}
+
+.form-control {
+	--bs-border-color: var(--corporate-color-1);
+}
+
+.form-label {
+	font-family: HelveticaNeueCyr;
+	font-weight: 400;
+	font-size: 16px;
+}
+
+.form-select {
+    --bs-form-select-bg-img: url(../img/ico/chevron-down.svg);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--corporate-color-1);
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+#bookingModal .modal-header {
+	--bs-modal-header-padding: 60px 60px 0 60px;
+	border-bottom: none;
+}
+
+#bookingModal .modal-body {
+	--bs-modal-padding: 60px 60px 0 60px;
+}
+
+#bookingModal .modal-footer {
+	--bs-modal-padding: 60px;
+	justify-content: flex-start;
+	border-top: none;
+}
+
+input[type='date']:not(:focus):invalid {
+	color: transparent;
+}

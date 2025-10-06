@@ -33,9 +33,7 @@ get_header();
             <div class="col mb-5">
                 <?php
                 $terms = get_terms(array(
-                    'taxonomy' => 'apartment_category',
-                    'hide_empty' => true,
-                    'exclude' => array(7),
+                    'taxonomy' => 'apartment_category'
                 ));
 
                 if ($terms && !is_wp_error($terms)) :
@@ -81,7 +79,7 @@ get_header();
                         <a href="<?php the_permalink(); ?>" class="text-decoration-none text-dark">
                             <div class="card h-100">
                                 <img src="<?php echo esc_url($card_image); ?>" class="card-img-top" alt="<?php the_title_attribute(); ?>" />
-                                <div class="card-body">
+                                <div class="card-body d-flex flex-column">
                                     <h3 class="card-title"><?php the_title(); ?></h3>
                                     <?php if (has_excerpt()) : ?>
                                         <p class="card-text"><?php echo wp_trim_words(get_the_excerpt(), 20); ?></p>
@@ -89,12 +87,12 @@ get_header();
                                     <?php if ($price) : ?>
                                         <p class="card-text"><strong><?php echo esc_html($price); ?></strong></p>
                                     <?php endif; ?>
-                                    <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-start align-items-md-center">
+                                    <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-start align-items-md-center mt-auto">
                                         <button
                                             type="button"
                                             class="btn btn-corporate-color-1 mt-0 me-2"
                                             data-bs-toggle="modal"
-                                            data-bs-target="#callbackModal"
+                                            data-bs-target="#bookingModal"
                                             onclick="event.stopPropagation(); event.preventDefault();">
                                             Забронировать
                                         </button>

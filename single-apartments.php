@@ -80,9 +80,9 @@ $post_id = get_the_ID();
 
             <!-- Описание номера -->
             <div class="col text-dark text-start" style="padding-right: 0">
-                <div class="woocommerce-product-details__short-description">
-                    <?php the_content(); ?>
-                </div>
+                <h2 class="mb-3"><?php the_title(); ?></h2>
+
+                <?php the_content(); ?>
 
                 <?php if ($price): ?>
                     <p><strong><?php echo esc_html($price); ?>/сутки</strong></p>
@@ -90,7 +90,7 @@ $post_id = get_the_ID();
 
                 <button class="btn btn-corporate-color-1 mt-2 text-light"
                     data-bs-toggle="modal"
-                    data-bs-target="#callbackModal">
+                    data-bs-target="#bookingModal">
                     Забронировать
                 </button>
             </div>
