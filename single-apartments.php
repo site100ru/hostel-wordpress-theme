@@ -80,7 +80,7 @@ $post_id = get_the_ID();
 
             <!-- Описание номера -->
             <div class="col text-dark text-start" style="padding-right: 0">
-                <h2 class="mb-3"><?php the_title(); ?></h2>
+                <h2 class="mb-3 product_title"><?php the_title(); ?></h2>
 
                 <?php the_content(); ?>
 
