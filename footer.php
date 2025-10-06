@@ -289,7 +289,7 @@
 <!-- Callback Modal -->
 <div class="modal fade" id="callbackModal" tabindex="-1" aria-labelledby="#callbackModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <form method="post" action="mails/callback-mail.php" class="modal-content">
+        <form method="post" action="<?php echo get_template_directory_uri(); ?>/mails/callback-mail.php" class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="#callbackModalLabel">Обратный звонок</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -325,7 +325,7 @@
 <!-- Booking Modal -->
 <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <form method="post" action="mails/booking-mail.php" class="modal-content">
+        <form method="post" action="<?php echo get_template_directory_uri(); ?>/mails/booking-mail.php" class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="bookingModalLabel">Оставить заявку</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
