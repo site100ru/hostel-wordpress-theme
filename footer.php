@@ -87,7 +87,7 @@
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#bookingModal">
                             <div style="display: flex" class="align-items-center">
                                 <div class="nav-li-float-left">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/img/ico/location-ico.svg" class="pt-1" />
+                                    <img src="<?php echo get_template_directory_uri(); ?>/img/ico/telephone-ico-blue.svg" class="pt-1" />
                                 </div>
                                 <div class="nav-li-float-right">
                                     <span class="bron">Забронировать</span>
@@ -179,7 +179,7 @@
                         <a href="#" class="nav-link ps-0 pt-2" data-bs-toggle="modal" data-bs-target="#bookingModal">
                             <div style="display: flex" class="align-items-center">
                                 <div class="nav-li-float-left">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/img/ico/location-ico.svg" />
+                                    <img src="<?php echo get_template_directory_uri(); ?>/img/ico/telephone-ico-blue.svg" />
                                 </div>
                                 <div class="nav-li-float-right">
                                     <span class="bron">Забронировать</span>
