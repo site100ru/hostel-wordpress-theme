@@ -383,10 +383,12 @@
                 </div>
             </div>
 
-            <div class="modal-footer">
-                <button type="submit" class="btn-lg btn btn-corporate-color-1" style="border-radius: 0.5rem; background-color: var(--corporate-color-1); border-color: var(--corporate-color-1); width: 200px;">
-                    Забронировать
-                </button>
+            <div class="modal-footer" style="width: 100%;">
+                <div class="col-lg-4 col-12 mb-3 mb-lg-0" style="margin: 0; padding-right: 16px;">
+                    <button type="submit" class="btn btn-corporate-color-1 w-100">
+                        Забронировать
+                    </button>
+                </div>
             </div>
         </form>
     </div>

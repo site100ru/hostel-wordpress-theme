@@ -460,6 +460,63 @@ function mytheme_customize_register($wp_customize)
         'priority' => 205,
     ));
 
+    // Адрес
+    $wp_customize->add_section('mytheme_contacts_address', array(
+        'title' => 'Адрес',
+        'panel' => 'contact_panel',
+        'priority' => 1
+    ));
+
+    $wp_customize->add_setting('mytheme_address', array(
+        'default' => '',
+        'transport' => 'postMessage',
+    ));
+
+    $wp_customize->add_control('mytheme_address', array(
+        'label' => 'Адрес',
+        'description' => 'Укажите адрес организации',
+        'section' => 'mytheme_contacts_address',
+        'type' => 'text',
+    ));
+
+    // GPS координаты
+    $wp_customize->add_section('mytheme_contacts_gps', array(
+        'title' => 'GPS координаты',
+        'panel' => 'contact_panel',
+        'priority' => 2
+    ));
+
+    $wp_customize->add_setting('mytheme_gps', array(
+        'default' => '',
+        'transport' => 'postMessage',
+    ));
+
+    $wp_customize->add_control('mytheme_gps', array(
+        'label' => 'GPS координаты',
+        'description' => 'Например: 54.600854, 39.721651',
+        'section' => 'mytheme_contacts_gps',
+        'type' => 'text',
+    ));
+
+    // Время работы
+    $wp_customize->add_section('mytheme_contacts_job_time', array(
+        'title' => 'Время работы',
+        'panel' => 'contact_panel',
+        'priority' => 3
+    ));
+
+    $wp_customize->add_setting('mytheme_job_time', array(
+        'default' => '',
+        'transport' => 'postMessage',
+    ));
+
+    $wp_customize->add_control('mytheme_job_time', array(
+        'label' => 'Время работы',
+        'description' => 'Укажите время работы',
+        'section' => 'mytheme_contacts_job_time',
+        'type' => 'text',
+    ));
+
     // Основной номер телефона
     $wp_customize->add_section('mytheme_contacts', array(
         'title' => 'Основной номер телефона',
@@ -500,6 +557,44 @@ function mytheme_customize_register($wp_customize)
         'label' => 'Номер телефона',
         'description' => 'Например: 880-80-88',
         'section' => 'mytheme_contacts',
+        'type' => 'text',
+    ));
+    
+    // Дополнительный телефон 1
+    $wp_customize->add_section('mytheme_contacts_phone_additional_1', array(
+        'title' => 'Дополнительный телефон 1',
+        'panel' => 'contact_panel',
+        'priority' => 5.5
+    ));
+
+    $wp_customize->add_setting('mytheme_additional_phone_1', array(
+        'default' => '',
+        'transport' => 'postMessage',
+    ));
+
+    $wp_customize->add_control('mytheme_additional_phone_1', array(
+        'label' => 'Дополнительный телефон 1',
+        'description' => 'Например: 8 (4912) 80-88-88',
+        'section' => 'mytheme_contacts_phone_additional_1',
+        'type' => 'text',
+    ));
+
+    // Дополнительный телефон 2
+    $wp_customize->add_section('mytheme_contacts_phone_additional_2', array(
+        'title' => 'Дополнительный телефон 2',
+        'panel' => 'contact_panel',
+        'priority' => 5.6
+    ));
+
+    $wp_customize->add_setting('mytheme_additional_phone_2', array(
+        'default' => '',
+        'transport' => 'postMessage',
+    ));
+
+    $wp_customize->add_control('mytheme_additional_phone_2', array(
+        'label' => 'Дополнительный телефон 2',
+        'description' => 'Например: 8 (800) 880-80-88',
+        'section' => 'mytheme_contacts_phone_additional_2',
         'type' => 'text',
     ));
 
@@ -557,101 +652,6 @@ function mytheme_customize_register($wp_customize)
         'description' => 'Укажите ссылку на WhatsApp',
         'section' => 'mytheme_contacts_whatsapp',
         'type' => 'url',
-    ));
-
-    // Адрес
-    $wp_customize->add_section('mytheme_contacts_address', array(
-        'title' => 'Адрес',
-        'panel' => 'contact_panel',
-        'priority' => 9
-    ));
-
-    $wp_customize->add_setting('mytheme_address', array(
-        'default' => '',
-        'transport' => 'postMessage',
-    ));
-
-    $wp_customize->add_control('mytheme_address', array(
-        'label' => 'Адрес',
-        'description' => 'Укажите адрес организации',
-        'section' => 'mytheme_contacts_address',
-        'type' => 'text',
-    ));
-
-    // Время работы
-    $wp_customize->add_section('mytheme_contacts_job_time', array(
-        'title' => 'Время работы',
-        'panel' => 'contact_panel',
-        'priority' => 10
-    ));
-
-    $wp_customize->add_setting('mytheme_job_time', array(
-        'default' => '',
-        'transport' => 'postMessage',
-    ));
-
-    $wp_customize->add_control('mytheme_job_time', array(
-        'label' => 'Время работы',
-        'description' => 'Укажите время работы',
-        'section' => 'mytheme_contacts_job_time',
-        'type' => 'text',
-    ));
-
-    // GPS координаты
-    $wp_customize->add_section('mytheme_contacts_gps', array(
-        'title' => 'GPS координаты',
-        'panel' => 'contact_panel',
-        'priority' => 9.5
-    ));
-
-    $wp_customize->add_setting('mytheme_gps', array(
-        'default' => '',
-        'transport' => 'postMessage',
-    ));
-
-    $wp_customize->add_control('mytheme_gps', array(
-        'label' => 'GPS координаты',
-        'description' => 'Например: 54.600854, 39.721651',
-        'section' => 'mytheme_contacts_gps',
-        'type' => 'text',
-    ));
-
-    // Дополнительный телефон 1
-    $wp_customize->add_section('mytheme_contacts_phone_additional_1', array(
-        'title' => 'Дополнительный телефон 1',
-        'panel' => 'contact_panel',
-        'priority' => 5.5
-    ));
-
-    $wp_customize->add_setting('mytheme_additional_phone_1', array(
-        'default' => '',
-        'transport' => 'postMessage',
-    ));
-
-    $wp_customize->add_control('mytheme_additional_phone_1', array(
-        'label' => 'Дополнительный телефон 1',
-        'description' => 'Например: 8 (4912) 80-88-88',
-        'section' => 'mytheme_contacts_phone_additional_1',
-        'type' => 'text',
-    ));
-
-    // Дополнительный телефон 2
-    $wp_customize->add_section('mytheme_contacts_phone_additional_2', array(
-        'title' => 'Дополнительный телефон 2',
-        'panel' => 'contact_panel',
-        'priority' => 5.6
-    ));
-
-    $wp_customize->add_setting('mytheme_additional_phone_2', array(
-        'default' => '',
-        'transport' => 'postMessage',
-    ));
-
-    $wp_customize->add_control('mytheme_additional_phone_2', array(
-        'label' => 'Дополнительный телефон 2',
-        'description' => 'Например: 8 (800) 880-80-88',
-        'section' => 'mytheme_contacts_phone_additional_2',
-        'type' => 'text',
     ));
 }
 add_action('customize_register', 'mytheme_customize_register');

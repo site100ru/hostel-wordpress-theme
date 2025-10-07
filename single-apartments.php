@@ -192,4 +192,30 @@ $post_id = get_the_ID();
     }
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Получаем название текущего номера (страницы)
+    var apartmentName = '<?php echo esc_js(get_the_title()); ?>';
+    
+    // Когда открывается модальное окно
+    var bookingModal = document.getElementById('bookingModal');
+    if (bookingModal) {
+        bookingModal.addEventListener('show.bs.modal', function () {
+            // Находим select с номерами
+            var apartmentSelect = document.getElementById('apartment-select');
+            if (apartmentSelect) {
+                // Ищем опцию с нужным названием и выбираем её
+                var options = apartmentSelect.options;
+                for (var i = 0; i < options.length; i++) {
+                    if (options[i].value === apartmentName) {
+                        apartmentSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+
 <?php get_footer(); ?>

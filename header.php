@@ -84,7 +84,7 @@ if (isset($_SESSION['win'])) {
                                         class="top-menu-tel nav-link d-flex align-items-center gap-3 gap-md-2 gap-xl-3 lh-1"
                                         data-bs-toggle="modal"
                                         data-bs-target="#bookingModal">
-                                        <img src="<?php echo get_template_directory_uri(); ?>/img/ico/location-ico.svg" />
+                                        <img src="<?php echo get_template_directory_uri(); ?>/img/ico/telephone-ico-blue.svg" />
                                         Забронировать
                                     </button>
                                 </li>
@@ -285,11 +285,49 @@ if (isset($_SESSION['win'])) {
                             'container' => false,
                             'menu_class' => 'navbar-nav ms-auto mb-2 mb-lg-0',
                             'fallback_cb' => '__return_false',
-                            'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                            'items_wrap' => '<ul id="%1$s" class="navbar-nav ms-auto mb-2 mb-lg-0 %2$s">%3$s</ul>',
                             'depth' => 2,
                             'walker' => new bootstrap_5_wp_nav_menu_walker()
                         ));
                         ?>
+
+                        <!-- Mobile menu -->
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item d-lg-none">
+                                <a class="nav-link active pt-0" href="#" data-bs-toggle="modal" data-bs-target="#bookingModal">Забронировать</a>
+                            </li>
+                            <li class="nav-item d-lg-none">
+                                <div style="font-size: 12px; font-family: Gilroy-Light; text-transform: none;">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/img/ico/location-ico.svg" style="width: 10px; position: relative; top: -2px;" class="me-1">
+                                    <span><?php echo nl2br(esc_html(get_theme_mod('mytheme_address', 'гор. Рязань, ул. Березовая, д. 1Д-К'))); ?></span>
+                                </div>
+                                <?php
+                                $country_code = get_theme_mod('mytheme_main_phone_country_code', '8');
+                                $region_code = get_theme_mod('mytheme_main_phone_region_code', '800');
+                                $phone_number = get_theme_mod('mytheme_main_phone_number', '880-80-88');
+                                $phone_display = $country_code . ' (' . $region_code . ') ' . $phone_number;
+                                $phone_link = preg_replace('/[^0-9+]/', '', $country_code . $region_code . $phone_number);
+                                ?>
+                                <a class="nav-link top-menu-tel pt-1 pb-1" href="tel:<?php echo esc_attr($phone_link); ?>"><?php echo esc_html($phone_display); ?></a>
+                                <div class="mb-2" style="font-size: 12px; font-family: Gilroy-Light; text-transform: none;">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/img/ico/clock-ico.svg" style="width: 10px; position: relative; top: 3px;" class="me-1 mb-2">
+                                    <?php echo nl2br(esc_html(get_theme_mod('mytheme_job_time', 'Пн-Вс, круглосуточно'))); ?>
+                                </div>
+                            </li>
+                            <li class="nav-item d-lg-none pb-2">
+                                <?php
+                                $whatsapp = get_theme_mod('mytheme_whatsapp', 'https://wa.me/79265930177?web=1&app_absent=1');
+                                $telegram = get_theme_mod('mytheme_telegram', 'https://t.me/+79265930177');
+                                ?>
+                                <a class="ico-button pe-2" href="<?php echo esc_url($whatsapp); ?>">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/img/ico/whatsapp-ico.svg">
+                                </a>
+                                <a class="ico-button pe-0" href="<?php echo esc_url($telegram); ?>">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/img/ico/telegram-ico.svg">
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- End mobile menu -->
                     </div>
                 </div>
             </nav>
