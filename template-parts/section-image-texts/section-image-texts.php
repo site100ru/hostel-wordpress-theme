@@ -27,10 +27,6 @@ switch ($background_color) {
         $bg_class = 'bg-light';
         $text_class = 'text-dark';
         break;
-    case 'dark':
-        $bg_class = 'bg-dark';
-        $text_class = 'text-light';
-        break;
     case 'white':
         $bg_class = 'bg-white';
         $text_class = 'text-dark';
