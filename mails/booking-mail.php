@@ -1,4 +1,5 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/wp-load.php');
 session_start();
 
 if ($_POST) {
