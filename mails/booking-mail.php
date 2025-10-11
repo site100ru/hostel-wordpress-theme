@@ -13,6 +13,8 @@ if ($_POST) {
     $guests = $_POST['guests'];
     $apartment = $_POST['apartment'];
 
+    $subject = "Новая заявка на бронирование";
+    
     $message = "Новая заявка на бронирование:\n\n";
     $message .= "ФИО: " . $surname . " " . $name . " " . $patronymic . "\n";
     $message .= "Телефон: " . $tel . "\n";
@@ -28,10 +30,10 @@ if ($_POST) {
     if (!empty($additional_emails)) {
         $emails = explode("\n", $additional_emails);
         
-        foreach ($emails as $email) {
-            $email = trim($email);
-            if (!empty($email)) {
-                mail($email, $subject, $message);
+        foreach ($emails as $email_to) {
+            $email_to = trim($email_to);
+            if (!empty($email_to)) {
+                mail($email_to, $subject, $message);
             }
         }
     }
@@ -39,4 +41,6 @@ if ($_POST) {
     $_SESSION['win'] = 1;
     $_SESSION['recaptcha'] = '<p class="text-light">Спасибо за заявку! Мы свяжемся с Вами в ближайшее время.</p>';
     header("Location: " . $_SERVER['HTTP_REFERER']);
+    exit;
 }
+?>
