@@ -559,7 +559,7 @@ function mytheme_customize_register($wp_customize)
         'section' => 'mytheme_contacts',
         'type' => 'text',
     ));
-    
+
     // Дополнительный телефон 1
     $wp_customize->add_section('mytheme_contacts_phone_additional_1', array(
         'title' => 'Дополнительный телефон 1',
@@ -611,9 +611,24 @@ function mytheme_customize_register($wp_customize)
     ));
 
     $wp_customize->add_control('mytheme_email', array(
-        'label' => 'Email',
+        'label' => 'Основной Email',
+        'description' => 'Основной email для контактов',
         'section' => 'mytheme_contacts_email',
         'type' => 'email',
+    ));
+
+    // Дополнительные Email
+    $wp_customize->add_setting('mytheme_additional_emails', array(
+        'default' => '',
+        'transport' => 'postMessage',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+
+    $wp_customize->add_control('mytheme_additional_emails', array(
+        'label' => 'Дополнительные Email',
+        'description' => 'Укажите дополнительные email адреса для получения уведомлений. Каждый email с новой строки.',
+        'section' => 'mytheme_contacts_email',
+        'type' => 'textarea',
     ));
 
     // Telegram
@@ -689,3 +704,115 @@ function echo_description()
     }
 }
 /*** END ДЕЛАЕМ ПРАВИЛЬНЫЙ DESCRIPTION ДЛЯ КАЖДОЙ СТРАНИЦЫ ***/
+
+/**
+ * Регистрация ACF блоков
+ */
+add_action('acf/init', function () {
+    if (function_exists('acf_register_block_type')) {
+        
+        acf_register_block_type([
+            'name' => 'section-gallery-text-modal',
+            'title' => 'Секция: Галерея с текстом',
+            'description' => 'Секция с каруселью изображений, текстом и модальным окном для просмотра',
+            'render_template' => get_template_directory() . '/template-parts/section-image-texts/section-image-texts.php',
+            'category' => 'custom-blocks',
+            'icon' => 'images-alt2',
+            'keywords' => ['галерея', 'gallery', 'карусель', 'slider', 'текст', 'изображения', 'модальное окно'],
+            'mode' => 'preview',
+            'supports' => [
+                'align' => ['wide', 'full'],
+                'mode' => true,
+                'jsx' => true,
+                'anchor' => true,
+            ],
+            'example' => [
+                'attributes' => [
+                    'mode' => 'preview',
+                    'data' => [
+                        'section_title' => 'Мини - отель «Городской»',
+                        'image_position' => 'left',
+                        'background_color' => 'light',
+                        'show_title_decoration' => true,
+                    ]
+                ]
+            ]
+        ]);
+        
+        acf_register_block_type([
+            'name' => 'section-text-only',
+            'title' => 'Секция: Текст',
+            'description' => 'Простая секция с заголовком и текстовым содержимым',
+            'render_template' => get_template_directory() . '/template-parts/section-texts/section-texts.php',
+            'category' => 'custom-blocks',
+            'icon' => 'editor-alignleft',
+            'keywords' => ['текст', 'text', 'описание', 'содержимое', 'параграф', 'список'],
+            'mode' => 'preview',
+            'supports' => [
+                'align' => ['wide', 'full'],
+                'mode' => true,
+                'jsx' => true,
+                'anchor' => true,
+            ],
+            'example' => [
+                'attributes' => [
+                    'mode' => 'preview',
+                    'data' => [
+                        'section_title' => 'Заселение',
+                        'background_color' => 'none',
+                        'show_title_decoration' => true,
+                    ]
+                ]
+            ]
+        ]);
+    }
+});
+
+if (function_exists('acf_add_options_page')) {
+    
+    // Главная страница настроек
+    acf_add_options_page([
+        'page_title' => 'Описание о хостеле для главной страницы',
+        'menu_title' => 'Описание о хостеле',
+        'menu_slug' => 'theme-general-settings',
+        'capability' => 'edit_posts',
+        'redirect' => false,
+        'position' => '59',
+        'icon_url' => 'dashicons-admin-settings',
+        'update_button' => 'Сохранить изменения',
+        'updated_message' => 'Настройки сохранены',
+    ]);
+    
+    // Можно добавить подстраницы (если нужно)
+    /*
+    acf_add_options_sub_page([
+        'page_title' => 'Секция О хостеле',
+        'menu_title' => 'О хостеле',
+        'menu_slug' => 'theme-about-settings',
+        'parent_slug' => 'theme-general-settings',
+    ]);
+    
+    acf_add_options_sub_page([
+        'page_title' => 'Контакты',
+        'menu_title' => 'Контакты',
+        'menu_slug' => 'theme-contacts-settings',
+        'parent_slug' => 'theme-general-settings',
+    ]);
+    */
+}
+
+/**
+ * Регистрация категории для кастомных блоков
+ */
+add_filter('block_categories_all', function ($categories) {
+    return array_merge(
+        $categories,
+        [
+            [
+                'slug' => 'custom-blocks',
+                'title' => __('Пользовательские блоки', 'textdomain'),
+                'icon' => 'layout',
+            ],
+        ]
+    );
+}, 10, 2);

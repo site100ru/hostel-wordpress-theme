@@ -2966,3 +2966,8 @@ footer {
 input[type='date']:not(:focus):invalid {
 	color: transparent;
 }
+
+.review-photo img {
+    max-width: 50px;
+    max-height: 50px;
+}

@@ -21,7 +21,19 @@ if ($_POST) {
     $message .= "Количество гостей: " . $guests . "\n";
     $message .= "Номер: " . $apartment;
 
-    mail("sidorov-vv3@mail.ru, vasilyev-r@mail.ru", "Заявка на бронирование с сайта", $message);
+    $additional_emails = get_theme_mod('mytheme_additional_emails');
+
+    // Отправляем на  emails
+    if (!empty($additional_emails)) {
+        $emails = explode("\n", $additional_emails);
+        
+        foreach ($emails as $email) {
+            $email = trim($email);
+            if (!empty($email)) {
+                mail($email, $subject, $message);
+            }
+        }
+    }
 
     $_SESSION['win'] = 1;
     $_SESSION['recaptcha'] = '<p class="text-light">Спасибо за заявку! Мы свяжемся с Вами в ближайшее время.</p>';
